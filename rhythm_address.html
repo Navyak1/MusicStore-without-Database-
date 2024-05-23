@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
+
+        .col-25 {
+            -ms-flex: 25%; /* IE10 */
+            flex: 25%;
+        }
+
+        .col-50 {
+            -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+        }
+
+        .col-75 {
+            -ms-flex: 75%; /* IE10 */
+            flex: 75%;
+        }
+
+        .col-25,
+        .col-50,
+        .col-75 {
+            padding: 0 16px;
+        }
+
+        .container {
+            background-color: #f2f2f2;
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+            padding: 5px 20px 15px 20px;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .btn {
+            background-color:#ffcc00;
+            color: #000000;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            width: 30%;
+            border-radius: 8px;
+            font-size: 17px;
+            align:center;
+        }
+        .btn-container{
+            text-align:center;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #2196F3;
+        }
+
+        hr {
+            border: 1px solid lightgrey;
+        }
+
+        span.price {
+            float: right;
+            color:grey;
+        }
+        .entire-page{
+            background-image:linear-gradient(30deg,#ffffff,#ffcc00);
+            background-size:cover;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var emailInput = document.getElementById('email');
+
+            emailInput.addEventListener('input', function() {
+                var email = emailInput.value;
+                var regEmail = /^\w+([\.-]?\w+)*@gmail\.com$/;
+
+                var errorElement = document.getElementById('email-error');
+                if (!regEmail.test(email)) {
+                    if (!errorElement) {
+                        errorElement = document.createElement('span');
+                        errorElement.id = 'email-error';
+                        errorElement.style.color = 'red';
+                        emailInput.parentNode.insertBefore(errorElement, emailInput.nextSibling);
+                    }
+                    errorElement.innerText = 'Please enter a valid Gmail address.';
+                } else {
+                    if (errorElement) {
+                        errorElement.innerText = '';
+                    }
+                }
+            });
+
+            var stateSelect = document.getElementById('state');
+            var citySelect = document.getElementById('city');
+
+            stateSelect.addEventListener('change', function() {
+                var selectedState = stateSelect.value;
+                citySelect.innerHTML = '';
+                if (selectedState === 'Andhra Pradesh') {
+                    addCities(["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool"]);
+                } else if (selectedState === 'Arunachal Pradesh') {
+                    addCities(["Itanagar", "Naharlagun", "Pasighat", "Daporijo", "Ziro"]);
+                }
+                // Add more states and their respective cities here
+            });
+
+            function addCities(cities) {
+                cities.forEach(function(city) {
+                    var option = document.createElement('option');
+                    option.value = city;
+                    option.text = city;
+                    citySelect.appendChild(option);
+                });
+            }
+        });
+
+        function rhythm() {
+            var firstname = document.forms.RegForm.firstname.value;
+            var email = document.forms.RegForm.email.value;
+            var address = document.forms.RegForm.address.value;
+            var city = document.forms.RegForm.city.value;
+            var state = document.forms.RegForm.state.value;
+            var cardname = document.forms.RegForm.cardname.value;
+            var cardnumber = document.forms.RegForm.cardnumber.value;
+            var cvv = document.forms.RegForm.cvv.value;
+            var expmonth = document.forms.RegForm.expmonth.value;
+            var expyear = document.forms.RegForm.expyear.value;
+
+            var regEmail = /^\w+([\.-]?\w+)*@gmail\.com$/; // Regular expression for Gmail address validation
+
+            if (firstname == "") {
+                window.alert("Please enter your name properly.");
+                return false;
+            }
+            if (!regEmail.test(email)) {
+                window.alert("Please enter a valid Gmail address.");
+                return false;
+            }
+            if (address == "") {
+                window.alert("Please enter your address.");
+                return false;
+            }
+            if (city == "") {
+                alert("Please enter your city");
+                return false;
+            }
+            if (state == "") {
+                alert("Please enter your state");
+                return false;
+            }
+            if (cardname == "") {
+                alert("Please enter your city");
+                return false;
+            }
+            if (cardnumber == "") {
+                alert("Please enter your card number");
+                return false;
+            }
+            if (cvv == "") {
+                alert("Please enter your cvv");
+                return false;
+            }
+            if (expmonth == "") {
+                alert("Please enter your expiry month");
+                return false;
+            }
+            if (expyear == "") {
+                alert("Please enter your expiry year");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <h2>Address and Payment</h2>
+    <div class="row">
+        <div class="col-75">
+            <div class="container">
+                <form name="RegForm" onsubmit="return rhythm()" action="file:///C:/Users/Sri%20Navya/OneDrive/Desktop/WAD%20PROJECT-1/rhythm_thanks.html" method="post">
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Billing Address</h3>
+                            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="Enter your name">
+                            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                            <input type="text" id="email" name="email" placeholder="Enter email">
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+                            <input type="text" id="adr" name="address" placeholder="Enter address">
+                            <label for="state">State</label>
+                            <select id="state" name="state">
+                                <option value="" selected disabled>Select State</option>
+                                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Assam">Assam</option>
+                                <option value="Bihar">Bihar</option>
+                                <option value="Chandigarh">Chandigarh</option>
+                                <option value="Chhattisgarh">Chhattisgarh</option>
+                                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                <option value="Jharkhand">Jharkhand</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Ladakh">Ladakh</option>
+                                <option value="Lakshadweep">Lakshadweep</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Manipur">Manipur</option>
+                                <!-- Add more states here -->
+                            </select>
+                            <label for="city">City</label>
+                            <select id="city" name="city">
+    <option value="" selected disabled>Select City</option>
+    <!-- Andaman and Nicobar Islands -->
+    <option value="Port Blair">Port Blair</option>
+    
+    <!-- Andhra Pradesh -->
+    <option value="Visakhapatnam">Visakhapatnam</option>
+    <option value="Vijayawada">Vijayawada</option>
+    <option value="Guntur">Guntur</option>
+    
+    <!-- Arunachal Pradesh -->
+    <option value="Itanagar">Itanagar</option>
+    <option value="Naharlagun">Naharlagun</option>
+    
+    <!-- Assam -->
+    <option value="Guwahati">Guwahati</option>
+    <option value="Dibrugarh">Dibrugarh</option>
+    <option value="Silchar">Silchar</option>
+    
+    <!-- Bihar -->
+    <option value="Patna">Patna</option>
+    <option value="Gaya">Gaya</option>
+    
+    <!-- Chandigarh -->
+    <option value="Chandigarh">Chandigarh</option>
+    
+    <!-- Chhattisgarh -->
+    <option value="Raipur">Raipur</option>
+    <option value="Bhilai">Bhilai</option>
+    
+    <!-- Dadra and Nagar Haveli and Daman and Diu -->
+    <option value="Daman">Daman</option>
+    
+    <!-- Delhi -->
+    <option value="New Delhi">New Delhi</option>
+    
+    <!-- Goa -->
+    <option value="Panaji">Panaji</option>
+    
+    <!-- Gujarat -->
+    <option value="Ahmedabad">Ahmedabad</option>
+    <option value="Surat">Surat</option>
+    
+    <!-- Haryana -->
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Faridabad">Faridabad</option>
+    
+    <!-- Himachal Pradesh -->
+    <option value="Shimla">Shimla</option>
+    <option value="Mandi">Mandi</option>
+    
+    <!-- Jammu and Kashmir -->
+    <option value="Srinagar">Srinagar</option>
+    <option value="Jammu">Jammu</option>
+    
+    <!-- Jharkhand -->
+    <option value="Ranchi">Ranchi</option>
+    <option value="Jamshedpur">Jamshedpur</option>
+    
+    <!-- Karnataka -->
+    <option value="Bangalore">Bangalore</option>
+    <option value="Mysore">Mysore</option>
+    
+    <!-- Kerala -->
+    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+    <option value="Kochi">Kochi</option>
+    
+    <!-- Ladakh -->
+    <option value="Leh">Leh</option>
+    
+    <!-- Lakshadweep -->
+    <option value="Kavaratti">Kavaratti</option>
+    
+    <!-- Madhya Pradesh -->
+    <option value="Bhopal">Bhopal</option>
+    <option value="Indore">Indore</option>
+    
+    <!-- Maharashtra -->
+    <option value="Mumbai">Mumbai</option>
+    <option value="Pune">Pune</option>
+    
+    <!-- Manipur -->
+    <option value="Imphal">Imphal</option>
+    
+    <!-- Meghalaya -->
+    <option value="Shillong">Shillong</option>
+    
+    <!-- Mizoram -->
+    <option value="Aizawl">Aizawl</option>
+    
+    <!-- Nagaland -->
+    <option value="Kohima">Kohima</option>
+    
+    <!-- Odisha -->
+    <option value="Bhubaneswar">Bhubaneswar</option>
+    <option value="Cuttack">Cuttack</option>
+    
+    <!-- Puducherry -->
+    <option value="Puducherry">Puducherry</option>
+    
+    <!-- Punjab -->
+    <option value="Chandigarh">Chandigarh</option>
+    <option value="Amritsar">Amritsar</option>
+    
+    <!-- Rajasthan -->
+    <option value="Jaipur">Jaipur</option>
+    <option value="Jodhpur">Jodhpur</option>
+    
+    <!-- Sikkim -->
+    <option value="Gangtok">Gangtok</option>
+    
+    <!-- Tamil Nadu -->
+    <option value="Chennai">Chennai</option>
+    <option value="Coimbatore">Coimbatore</option>
+    
+    <!-- Telangana -->
+    <option value="Hyderabad">Hyderabad</option>
+    <option value="Warangal">Warangal</option>
+    
+    <!-- Tripura -->
+    <option value="Agartala">Agartala</option>
+    
+    <!-- Uttar Pradesh -->
+    <option value="Lucknow">Lucknow</option>
+    <option value="Kanpur">Kanpur</option>
+    
+    <!-- Uttarakhand -->
+    <option value="Dehradun">Dehradun</option>
+    <option value="Haridwar">Haridwar</option>
+    
+    <!-- West Bengal -->
+    <option value="Kolkata">Kolkata</option>
+    <option value="Asansol">Asansol</option>
+</select>
+
+                        </div>
+
+                        <div class="col-50">
+                            <h3>Payment</h3>
+                            <label for="fname">Accepted Cards</label>
+                            <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                            <label for="cname">Name on Card</label>
+                            <input type="text" id="cname" name="cardname" placeholder="Enter card name">
+                            <label for="ccnum">Credit card number</label>
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="Enter card number">
+                            <label for="expmonth">Exp Month</label>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="Expiry month">
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expyear">Exp Year</label>
+                                    <input type="text" id="expyear" name="expyear" placeholder="Expiry year">
+                                </div>
+                                <div class="col-50">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="Enter cvv">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-container">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

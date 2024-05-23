@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>login page</title>
+<style>
+p {
+    color: white;
+    size: 100;
+}
+.bg-card {
+    background-ground: #ffffff;
+    height: 400px;
+    border-radius: 20px;
+}
+.bg-img {
+    background-image: url("https://wallpaperforu.com/wp-content/uploads/2021/04/Wallpaper-Piano-Bw-Black-Hd-Gray-And-Black-Piano-Keys-Mu3939.jpg");
+    height: 100%;
+    background-size: cover;
+}
+.subm-button {
+    background-color: #FF8C00;
+    color: white;
+    padding: 10px;
+    height: 35px;
+    width: 89px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+input[type=text], input[type=password] {
+    width: 20%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+.alignment {
+    text-align: center;
+}
+.userimg {
+    height: 250px;
+    width: 250px;
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    margin-left: 40px;
+}
+#password-length-warning {
+    color: red;
+    font-size: 14px;
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var passwordInput = document.getElementById("password");
+    var passwordWarning = document.getElementById("password-length-warning");
+    
+    passwordInput.addEventListener("input", function() {
+        var password = passwordInput.value;
+
+        // Password length check
+        if (password.length < 8 || password.length > 12) {
+            passwordWarning.innerText = "Password must be between 8 and 12 characters.";
+            return;
+        }
+
+        // Password complexity check
+        var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+        if (!strongRegex.test(password)) {
+            passwordWarning.innerText = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+            return;
+        }
+
+        passwordWarning.innerText = "";
+    });
+});
+
+function loginpage() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    
+    // Password length check
+    if (password.length < 8 || password.length > 12) {
+        alert("Password must be between 8 and 12 characters.");
+        return false;
+    }
+
+    // Password complexity check
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])");
+    if (!strongRegex.test(password)) {
+        alert("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        return false;
+    }
+
+    if (username === "" && password !== "") {
+        alert("Enter username");
+        return false;
+    } else if (password === "" && username !== "") {
+        alert("Enter password");
+        return false;
+    } else if (password === "" && username === "") {
+        alert("Enter username and password");
+        return false;
+    }
+}
+function myFunction() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+        x.type = "text";
+    } else {
+        x.type = "password";
+    }
+}
+</script>
+</head>
+<body align="center">
+<div class="bg-img">
+    <div class="bg-card">
+        <img src="C:\Users\Sri Navya\Downloads\userpic1.png" class="userimg m-auto"/>
+        <b>Login</b>
+        <form action="file:///C:/Users/Sri%20Navya/OneDrive/Desktop/WAD%20PROJECT-1/DESCRIPTION%20PAGE.html" align="center" method="post" onsubmit="return loginpage()" class="container" name="login">
+            <div class="alignment">
+                <p><label for="username"><b>User name: </b></label><br />
+                <input type="text" placeholder="Enter user name" opacity="0.9" id="username" name="username"><br></p>
+            </div>
+            <div class="alignment">
+                <p><label for="password"><b>Password: </b></label><br />
+                <input type="password" placeholder="Enter password" id="password" name="password"><br>
+                <span id="password-length-warning"></span><br>
+                <input type="checkbox" onclick="myFunction()">Show Password</p>
+            </div>
+            <button class="subm-button" id="login1">Submit</button>
+            <p id="paragraph"></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

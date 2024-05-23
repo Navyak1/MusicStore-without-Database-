@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signup Page</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("https://images.unsplash.com/photo-1525385131911-539a3ab5ba84");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 400px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.input-group input[type="submit"] {
+    background-color: #FF8C00;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+.validation-error {
+    color: red;
+    font-size: 12px;
+}
+
+.social-icons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-icons a {
+    color: #000;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sign Up</h2>
+    <form action="file:///C:/Users/Sri%20Navya/OneDrive/Desktop/WAD%20PROJECT-1/DESCRIPTION%20PAGE.html" method="post" onsubmit="return validateForm()">
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" autocomplete="off">
+            <span id="name-error" class="validation-error"></span>
+        </div>
+        <div class="input-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone" placeholder="Enter your phone number" autocomplete="off">
+            <span id="phone-error" class="validation-error"></span>
+        </div>
+        <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="off">
+            <span id="email-error" class="validation-error"></span>
+        </div>
+        <div class="input-group" id="password-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+            <span id="password-error" class="validation-error"></span>
+        </div>
+         <div class="input-group">
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" oninput="validateConfirmPassword()">
+            <span id="confirm-password-error" class="validation-error"></span>
+        </div>
+        <input type="submit" value="Sign Up">
+    </form>
+    <div class="social-icons">
+        <a href="https://www.google.com"><i class="fab fa-google"></i></a>
+        <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+    </div>
+</div>
+
+<script>
+// Function to validate phone number
+function validatePhoneNumber() {
+    var phone = document.getElementById("phone").value;
+    var phoneError = document.getElementById("phone-error");
+    if (phone.length < 10) {
+        phoneError.innerHTML = "Phone number must be at least 10 digits long.";
+        return false;
+    } else {
+        phoneError.innerHTML = "";
+        return true;
+    }
+}
+
+// Function to validate email
+function validateEmail() {
+    var email = document.getElementById("email").value;
+    var emailError = document.getElementById("email-error");
+    if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+        emailError.innerHTML = "Please enter a valid email address.";
+        return false;
+    } else {
+        emailError.innerHTML = "";
+        return true;
+    }
+}
+
+// Function to validate password
+// Function to validate password
+function validatePassword() {
+    var password = document.getElementById("password").value;
+    var passwordError = document.getElementById("password-error");
+    if (!/^(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%^&*()-_+=]{8,}$/.test(password)) {
+        passwordError.innerHTML = "Password must start with a letter and be at least 8 characters long.";
+        return false;
+    } else {
+        passwordError.innerHTML = "";
+        return true;
+    }
+}
+
+// Function to validate form
+function validateForm() {
+    var valid = true;
+    if (!validatePhoneNumber()) {
+        valid = false;
+    }
+    if (!validateEmail()) {
+        valid = false;
+    }
+    if (!validatePassword()) {
+        valid = false;
+    }
+    return valid;
+}
+function validateConfirmPassword() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirm-password").value;
+    var confirmPasswordError = document.getElementById("confirm-password-error");
+
+    if (password !== confirmPassword) {
+        confirmPasswordError.innerHTML = "Passwords do not match.";
+        return false;
+    } else {
+        confirmPasswordError.innerHTML = "";
+        return true;
+    }
+}
+
+
+// Event listeners to trigger validation as the user types
+document.getElementById("phone").addEventListener("input", validatePhoneNumber);
+document.getElementById("email").addEventListener("input", validateEmail);
+document.getElementById("password").addEventListener("input", validatePassword);
+
+</script>
+
+</body>
+</html>
